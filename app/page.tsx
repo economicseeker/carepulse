@@ -1,11 +1,15 @@
 import Image from "next/image";
-import PatientForm from "@/components/forms/PatientForm";
+import { PatientForm } from "@/components/forms/PatientForm";
 import Link from "next/link";
-import { SearchParamProps } from "@/types/index.d.ts";
 import { PasskeyModal } from "@/components/PasskeyModal";
 
-export default function Home({ searchParams }: SearchParamProps) {
-  const isAdmin = searchParams?.admin === "true";
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const params = await searchParams;
+  const isAdmin = params?.admin === "true";
 
   return (
     <div className="flex h-screen max-h-screen">
